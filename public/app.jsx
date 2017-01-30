@@ -6,8 +6,7 @@ var Greeter = React.createClass({
     };
   },
   render: function () {
-    var name = this.props.name;
-    var message = this.props.message;
+    const {name, message} = this.props;
 
     return (
       <div>
