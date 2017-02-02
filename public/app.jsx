@@ -5,13 +5,35 @@ var Greeter = React.createClass({
       message: 'This is from compoment default props'
     };
   },
-  render: function () {
-    const {name, message} = this.props;
+  getInitialState: function () {
+    return {
+      name: this.props.name
+    };
+  },
+  onButtonClick: function(event) {
+    event.preventDefault();
+    var nameRef = this.refs.name;
+    var updatedName = nameRef.value;
+    nameRef.value = '';
 
+    if (typeof updatedName === 'string' && updatedName.length > 0) {
+      this.setState({
+        name:updatedName
+      });
+    } else {
+      alert('please enter name');
+    }
+  },
+  render: function () {
     return (
       <div>
-        <h1>Hello {name} !!!</h1>
-        <p>{message}</p>
+        <h1>Hello {this.state.name} !!!</h1>
+        <p>{this.props.message}</p>
+
+        <form onSubmit={this.onButtonClick}>
+          <input type="text" ref="name"/>
+          <button>Set Name</button>
+        </form>
       </div>
     );
   }
